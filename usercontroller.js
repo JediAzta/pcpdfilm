@@ -1,12 +1,13 @@
-const a = require("./auth")
-const mongoClient = require("mongodb").MongoClient
+const a = require('./auth')
+const mongoClient = require('mongodb').MongoClient
+const mongoAuth = require('./protected/mongoauth')
 
-const mongo_username = 'pcpduser'  
-const mongo_password = 'LPzdO32sbd3blW2z' 
+const mongo_username = mongoAuth.user  
+const mongo_password = mongoAuth.pwd
 
-const CONNECTION_URI = `mongodb+srv://${mongo_username}:${mongo_password}@assessmentcluster.fbg7m.mongodb.net/filmshop?retryWrites=true&w=majority`  //Update the path
-const DATABASE_NAME = "filmshop" 
-const USERCOLLECTION = "users" // Update your collection name here
+const CONNECTION_URI = `mongodb+srv://${mongo_username}:${mongo_password}@${mongoAuth.path}`  //Update the path
+const DATABASE_NAME = 'filmshop' 
+const USERCOLLECTION = 'users' // Update your collection name here
 
 const userController = {     
     login(req, res) {

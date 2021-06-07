@@ -2,9 +2,9 @@
 
 'use strict'
 
-const express = require("express")
-const appRoute = require("./approute")
-const cors = require("cors")
+const express = require('express')
+const appRoute = require('./approute')
+const cors = require('cors')
 const app = express()
 
 app.use(express.json())

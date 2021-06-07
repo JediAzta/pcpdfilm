@@ -1,20 +1,21 @@
 const user = require('./auth')
 const request = require('request')
-const mongoClient = require("mongodb").MongoClient
-const ObjectId = require("mongodb").ObjectID
+const mongoClient = require('mongodb').MongoClient
+const ObjectId = require('mongodb').ObjectID
 const { checkAuth } = require('./auth')
+const mongoAuth = require('./protected/mongoauth')
 
-const mongo_username = 'pcpduser'  
-const mongo_password = 'LPzdO32sbd3blW2z' 
+const mongo_username = mongoAuth.user  
+const mongo_password = mongoAuth.pwd
 
-const CONNECTION_URI = `mongodb+srv://${mongo_username}:${mongo_password}@assessmentcluster.fbg7m.mongodb.net/filmshop?retryWrites=true&w=majority`  //Update the path
-const DATABASE_NAME = "filmshop" 
-const FILMSCOLLECTION = "films" 
+const CONNECTION_URI = `mongodb+srv://${mongo_username}:${mongo_password}@${mongoAuth.path}`  //Update the path
+const DATABASE_NAME = 'filmshop' 
+const FILMSCOLLECTION = 'films' 
 
 
 const filmController = {
   qfilm(req, res) {
-    const url = "http://www.omdbapi.com/"
+    const url = 'http://www.omdbapi.com/'
     const APIkey = "54441395"
     const title = req.params.title
     const timestamp = new Date()
@@ -42,17 +43,21 @@ const filmController = {
         console.log(err)
         res.status(500).send({"status": 500, "description": err})
       } else {
-        const collection = db.db(DATABASE_NAME).collection(FILMSCOLLECTION)
-	const id = new ObjectId(req.params.fid)
-	console.log(`${req.params.fid} - ${id}`)
-        collection.find({_id:id}).toArray((err, result) => {
-          if(err) {
-            res.status(500).send({"status":500, "description":err})
-          } else {
-            res.send(result)
-          }
-        })
-        db.close()
+        try{
+          const collection = db.db(DATABASE_NAME).collection(FILMSCOLLECTION)
+	        const id = new ObjectId(req.params.fid)
+          collection.find({_id:id}).toArray((err, result) => {
+            if(err) {
+              res.status(500).send({"status":500, "description":err})
+            } else {
+              res.send(result)
+            }
+          })
+        }catch(err) {
+            res.status(501).send({'status': 501, 'description': 'The film ID is not valid'})
+        } finally{      
+          db.close()
+        }
       }
     })
   },

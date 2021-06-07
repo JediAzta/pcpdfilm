@@ -1,6 +1,6 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const filmController = require("./filmcontroller")
+const filmController = require('./filmcontroller')
 const userController = require('./usercontroller')
 
 router.get('/infofilm/:title', filmController.qfilm) //
