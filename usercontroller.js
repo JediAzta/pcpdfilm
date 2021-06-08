@@ -25,13 +25,16 @@ const userController = {
                 if(err) {
                   res.status(500).send({"status":500, "description":err})
                 } else {
-                  if(result.length==1){
-			console.log(result)
-	  	      if(result[0].type==1){
-                        res.status(200).send({"s": a.addkey(u)})
-		      } else {
-			res.status(403).send({"status": 403, "description": "You have no permission for this service"})
-		      }
+                  if(result.length==1){                  
+	  	              if(result[0].type==1){
+                      a.addkey(u).then((result) => {
+                        res.status(200).send({
+                          "s": result,
+                          "role": 1})
+                      })                    
+                    } else {
+                      res.status(403).send({"status": 403, "description": "You have no permission for this service"})
+                    }
 
                   } else {
                     res.status(401).send({"status": 401, "description": "Login Failed"})
@@ -44,13 +47,13 @@ const userController = {
 
     },
     createuser(req, res) {
-
+      res.status(501).send({"status": 501, "description": "In progress..."})
     },
     updateuser(req, res) {
-
+      res.status(501).send({"status": 501, "description": "In progress..."})
     },
     removeuser(req, res) {
-
+      res.status(501).send({"status": 501, "description": "In progress..."})
     }
 }
 

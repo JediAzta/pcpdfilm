@@ -6,14 +6,17 @@ For student project exercise
 - [/imfilm](#imfilm) - Import the Film information to the database
 - [/film/:fid](#film) - Query the film information
 - [/list](#list) - List all film information
-- [/auth](#auth) - User Login (Currenlty Not available)
+- [/auth](#auth) - User Login
 - [/apply](#apply) - Create new user (Currently Not available)
 - [/update](#update) - Update user password (Currently Not available)
 
 ### Version History
-1.0.0 - First Release 
-1.0.1 - Minor Update
 
+* 1.0.0 - First Release 
+* 1.0.1 - Minor Update
+* 1.0.2 - Readme is ready
+* 1.0.3 - Readme is updated
+* 1.0.4 - Debug Login API 
 ---
 
 ## Endpoint Description
@@ -65,8 +68,8 @@ Request Body Sample:
     }
 }
 ```
-s: The token by the login information
-film: The detail information of the film to be stored in the database
+- s: The token by the login information
+- film: The detail information of the film to be stored in the database
 
 Description: Retrieve the Film information from Public Datatbase (Non-English characters are not accepted)
 
@@ -91,7 +94,7 @@ Endpoint: **/film/:fid**
 
 Method:  **GET**
 
-Parameter: [:fid] - Film ID from the database (Object ID, refer to [list](#list))
+Parameter: [:fid] - Film ID from the database (Object ID (_id), refer to [list](#list))
 
 Description: Retrieve the Film information from the Shop's Datatbase 
 
@@ -100,6 +103,7 @@ Returns: **JSON**
 Samples: 
 ```javascript
 [{
+        "_id": "sadffaser5t234qasga",
         "title":"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
         "year":"1964",
         "released":"29 Jan 1964",
