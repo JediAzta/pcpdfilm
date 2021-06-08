@@ -5,13 +5,11 @@ const userController = require('./usercontroller')
 
 router.get('/infofilm/:title', filmController.qfilm) //
 router.post('/imfilm', filmController.addfilm) //
-router.get('/film/:fid', filmController.infofilm) 
+router.get('/film/:fid', filmController.infofilm) //
 router.get('/list', filmController.listAll) //
 router.post('/auth', userController.login) //
 router.post('/apply', userController.createuser)
 router.put('/update', userController.updateuser)
-router.delete('/removefilm', filmController.removefilm)
-router.delete('/removeuser', userController.removeuser)
 
 router.use((req, res, next) => {
   console.log('Invalid access~')
