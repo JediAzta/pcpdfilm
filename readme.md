@@ -16,7 +16,7 @@ For student project exercise
 * 1.0.1 - Minor Update
 * 1.0.2 - Readme is ready
 * 1.0.3 - Readme is updated
-* 1.0.4 - Debug Login API 
+* 1.0.4 - Debug Login API
 ---
 
 ## Endpoint Description

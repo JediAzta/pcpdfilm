@@ -27,9 +27,9 @@ const userController = {
                 } else {
                   if(result.length==1){                  
 	  	              if(result[0].type==1){
-                      a.addkey(u).then((result) => {
+                      a.addkey(u).then((r) => {
                         res.status(200).send({
-                          "s": result,
+                          "s": r,
                           "role": 1})
                       })                    
                     } else {
