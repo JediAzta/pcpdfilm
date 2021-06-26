@@ -50,7 +50,25 @@ const userController = {
       res.status(501).send({"status": 501, "description": "In progress..."})
     },
     updateuser(req, res) {
-      res.status(501).send({"status": 501, "description": "In progress..."})
+      //res.status(501).send({"status": 501, "description": "In progress..."})
+      const timestamp = new Date()
+      const key = req.body.key
+      const newpwd = req.body.newpwd
+      mongoClient.connect(CONNECTION_URI, (err, db)=>{
+        if(err){
+          res.status(500).send({"status":500, "description":err})
+        } else {
+          const collection = db.db(DATABASE_NAME).collection(USERCOLLECTION)
+          collection.updateOne({"key": key}, {$set: {password: newpwd}}, (err, result) => {
+              if(err) {
+                res.status(401).send({"status": 401, "description": "Password update failed."})
+              }                 
+              console.log(`${timestamp.toString()} - password update success`)
+              res.status(201).send({"status": 201, "description": "Password update successfully."})
+          })
+          db.close()            
+        }
+      })
     },
     removeuser(req, res) {
       res.status(501).send({"status": 501, "description": "In progress..."})

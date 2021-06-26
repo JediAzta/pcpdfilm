@@ -9,7 +9,7 @@ router.get('/film/:fid', filmController.infofilm) //
 router.get('/list', filmController.listAll) //
 router.post('/auth', userController.login) //
 router.post('/apply', userController.createuser)
-router.put('/update', userController.updateuser)
+router.put('/update', userController.updateuser) //
 
 router.use((req, res, next) => {
   console.log('Invalid access~')

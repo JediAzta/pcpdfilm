@@ -8,7 +8,7 @@ For student project exercise
 - [/list](#list) - List all film information
 - [/auth](#auth) - User Login
 - [/apply](#apply) - Create new user (Currently Not available)
-- [/update](#update) - Update user password (Currently Not available)
+- [/update](#update) - Update user password 
 
 ### Version History
 
@@ -17,6 +17,7 @@ For student project exercise
 * 1.0.2 - Readme is ready
 * 1.0.3 - Readme is updated
 * 1.0.4 - Debug Login API
+* 1.0.5 - Update user password feature is available
 ---
 
 ## Endpoint Description
@@ -206,9 +207,13 @@ Method:  **PUT**
 
 Request Body Sample: 
 ```javascript
+{
+    "key": "sadswe2314d",
+    "newpwd": "xxxxxxxxxx"
+}
 ```
 
-Description: (Not implemented yet) Update user information
+Description: Update user password.
 
 Returns: **JSON**
 
