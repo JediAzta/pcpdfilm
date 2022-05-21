@@ -96,7 +96,7 @@ const filmController = {
         res.status(500).send({"status": 500, "description": err})
       } else {
         const collection = db.db(DATABASE_NAME).collection(FILMSCOLLECTION)
-        collection.find({}).toArray((err, result) => {
+        collection.find({}).limit(50).toArray((err, result) => {
           if(err) {
             res.status(500).send({"status":500, "description":err})
           } else {
