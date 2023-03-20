@@ -1,16 +1,26 @@
 {
-  "name": "nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "pcpdfilm",
+  "version": "1.0.5",
+  "description": "This is the demo API for PCPD students",
+  "main": "app.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.9",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JediAzta/pcpdfilm.git"
+  },
+  "author": "JediAzta",
   "license": "ISC",
-  "dependencies": {
-    "@types/node": "^18.0.6",
-    "node-fetch": "^3.2.6"
-  }
+  "bugs": {
+    "url": "https://github.com/JediAzta/pcpdfilm/issues"
+  },
+  "homepage": "https://github.com/JediAzta/pcpdfilm#readme"
 }
