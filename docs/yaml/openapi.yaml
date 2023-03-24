@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Film API
+  description: A Film Shop API for PCPD assessment
+  contact: 
+  name: Master Chit
+  email: hcwong@vtc.edu.hk
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://FilmAPI.masterchit.repl.co'
+    description: Development Server
+  - url: 'http://8.217.65.101:18888'
+    description: Production Server
+components:
+  securitySchemes:
+    basicAuth:   
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []
+tags:
+  - name: Users
+    description: API endpoints for user management
+  - name: Films
+    description: Access and perform CRUx operations on film entries
+paths:
+  /films:
+    get:
+      tags:
+        - Films
+      description:
+        Get all film records from database
+      responses:
+        '200':
+          description: View of all film records
+  /film:    
+    post:
+      tags:
+        - Films
+      description:
+        Create a new film record
+      parameters:
+        - in: header
+          name: k
+          schema:
+            type: string
+          required: true          
+      requestBody:
+        description: new film content
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./film.json#/definitions/film
+        responses:
+          '201':
+            description: Successful insert a new record
+          '500':
+            description: Something wrong from the server
+        
+  /film/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: id of the film
+    get:
+      tags:
+        - Films
+      description:
+        Get film record by id.
+      responses:
+        '200':
+          description: View of a film record
+        '404':
+          description: Film record was not found in the DB
+
+  /ofilm/{title}:
+    parameters:
+      - in: path
+        name: title
+        schema:
+          type: string
+        required: true
+        description: film name / keyword search through OMDB
+    get:
+      tags:
+        - Films
+      description:
+        Retreive the information from OMDb
+      responses:
+        '200':
+          description: Return a film data for film shop editor
+        '404':
+          description: Film data was not found in the database
+
+  /user:
+    get:
+      tags:
+        - Users
+      description:
+        User Login
+      security:        
+        - basicAuth: []
+      responses:
+        "401":
+          description: Invalid Login
+        "200":
+          description: Login successfully with a key provided
+    put:
+      tags:
+        - Users
+      description:
+        Update user information (Owner account only)
+      parameters:
+        - in: header
+          name: k
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Update user information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./user.json#/definitions/user
+      responses:
+        "500":
+          description: Database return errors
+        "200":
+          description: Update successfully

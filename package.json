@@ -14,6 +14,7 @@
     "koa-logger": "^3.2.1",
     "koa-passport": "^6.0.0",
     "koa-router": "^12.0.0",
+    "koa-static-folder": "^0.1.6",
     "mongodb": "^5.1.0",
     "passport-http": "^0.3.0",
     "request": "^2.88.2"

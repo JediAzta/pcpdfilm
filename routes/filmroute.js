@@ -23,18 +23,17 @@ const omdbapi = async(ctx, next) => {
   const title = ctx.params.title    
 
   try {
-      const { data, status } = await axios.get(`${url}?apikey=${APIkey}&t=${title}`)
-      const j = JSON.parse(data)
+      const { data, status } = await axios.get(`${url}?apikey=${APIkey}&t=${title}`)      
       ctx.status = 200
       ctx.body = {
-        "title": j.Title,
-        "year": j.Year,
-        "released": j.Released,
-        "runtime": j.Runtime,
-        "language": j.Language,
-        "genre": j.Genre,
-        "director": j.Director,
-        "poster": j.Poster
+        "title": data.Title,
+        "year": data.Year,
+        "released": data.Released,
+        "runtime": data.Runtime,
+        "language": data.Language,
+        "genre": data.Genre,
+        "director": data.Director,
+        "poster": data.Poster
       }
     }catch(err){
       ctx.status = 500
