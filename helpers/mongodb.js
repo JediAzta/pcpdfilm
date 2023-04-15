@@ -10,12 +10,14 @@ const DATABASE_NAME = mongoAuth.dbname
 exports.run_query = async (collection, query) => {
   const dbClient = await mongoClient.connect(CONNECTION_URI)
   const result = await dbClient.db(DATABASE_NAME).collection(collection).find(query).toArray()
+  dbClient.close()
   return result
 }
 
 exports.run_insert = async (collection, document) => {
   const dbClient = await mongoClient.connect(CONNECTION_URI)
   const result = await dbClient.db(DATABASE_NAME).collection(collection).insertOne(document)
+  dbClient.close()
   if (result.acknowledged) {
     return { "status": 201, "description": "Data insert successfully", "id": result.insertedId }
   } else {
@@ -28,6 +30,7 @@ exports.run_update = async (collection, query, document) => {
   try{
     const dbClient = await mongoClient.connect(CONNECTION_URI)      
     const result = await dbClient.db(DATABASE_NAME).collection(collection).updateOne(query, updateDoc)  
+    dbClient.close()
     if (result.modifiedCount == 1) {
       return { "status": 201, "description": "Data update successfully"}
     } else {
